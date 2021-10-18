@@ -7,19 +7,19 @@ object TicTacToe extends App {
   var winner = " "
   var gameOver = false
   var grid: Array[Array[String]] = Array(Array(" ", " ", " "), Array(" ", " ", " "), Array(" ", " ", " "))
+  var startNewGame = true
 
+  def mainGameLoop(): Unit = {
 
-//  def mainGameLoop(): Unit = {
-//    var startNewGame = true
-//    while (startNewGame) {
-////      singleGameLoop()
-//      val response = readLine("New game Y/N ?")
-//      if (response.toLowerCase.startsWith("y")) {
-//        singleGameLoop()
-//      } else startNewGame = false
-//    }
-//  }
-//    mainGameLoop()
+    while (startNewGame) {
+      singleGameLoop()
+      val response = readLine("New game Y/N ?")
+      if (response.toLowerCase.startsWith("y")) {
+        resetGameState()
+      } else startNewGame = false
+    }
+  }
+    mainGameLoop()
 
     def singleGameLoop(): Unit = {
       print_instructions()
@@ -29,14 +29,15 @@ object TicTacToe extends App {
         player_move(whoseTurn, grid)
       }
     }
-    singleGameLoop()
+//    singleGameLoop()
 
-    //          def resetGameState(): Unit = {
-    //            gameOver = true
-    //
-    //          }
-    //        }
-
+    def resetGameState(): Unit = {
+      while (startNewGame) {
+       whoseTurn = "0"
+        print_grid(grid)
+        player_move(whoseTurn, grid)
+      }
+     }
 
     //This function prints out instructions at the beginning
     def print_instructions(): Unit = {
@@ -88,8 +89,8 @@ object TicTacToe extends App {
 
     //this function makes a player's move
     def player_move(turn: String, grid: Array[Array[String]]): Unit = {
-      var coordinate_input = scala.io.StdIn.readLine(s"Where would you like to place your $turn? ")
-      var coordinate = coordinate_input.split(",").map(_.toInt)
+      val coordinate_input = readLine(s"Where would you like to place your $turn? ")
+      val coordinate = coordinate_input.split(",").map(_.toInt)
       if (grid(coordinate(0))(coordinate(1)) == " ") {
         grid(coordinate(0))(coordinate(1)) = turn
         switch_turn()
@@ -100,7 +101,6 @@ object TicTacToe extends App {
         println("Oops! Illegal move. Try again!")
         player_move(turn, grid)
       }
-
     }
 
     //this function switches the players' turns
@@ -116,67 +116,67 @@ object TicTacToe extends App {
     //this function checks if any player has won
     def check_for_win(): Unit = {
       if (grid(0)(0) == "O" && grid(0)(1) == "O" && grid(0)(2) == "O") {
-        winner = "O";
+        winner = "O"
         there_is_a_winner()
       }
       else if (grid(1)(0) == "O" && grid(1)(1) == "O" && grid(1)(2) == "O") {
-        winner = "O";
+        winner = "O"
         there_is_a_winner()
       }
       else if (grid(2)(0) == "O" && grid(2)(1) == "O" && grid(2)(2) == "O") {
-        winner = "O";
+        winner = "O"
         there_is_a_winner()
       }
       else if (grid(0)(0) == "O" && grid(1)(0) == "O" && grid(2)(0) == "O") {
-        winner = "O";
+        winner = "O"
         there_is_a_winner()
       }
       else if (grid(0)(1) == "O" && grid(1)(1) == "O" && grid(2)(1) == "O") {
-        winner = "O";
+        winner = "O"
         there_is_a_winner()
       }
       else if (grid(0)(2) == "O" && grid(1)(2) == "O" && grid(2)(2) == "O") {
-        winner = "O";
+        winner = "O"
         there_is_a_winner()
       }
       else if (grid(0)(0) == "O" && grid(1)(1) == "O" && grid(2)(2) == "O") {
-        winner = "O";
+        winner = "O"
         there_is_a_winner()
       }
       else if (grid(0)(2) == "O" && grid(1)(1) == "O" && grid(2)(0) == "O") {
-        winner = "O";
+        winner = "O"
         there_is_a_winner()
       }
       else if (grid(0)(0) == "X" && grid(0)(1) == "X" && grid(0)(2) == "X") {
-        winner = "X";
+        winner = "X"
         there_is_a_winner()
       }
       else if (grid(1)(0) == "X" && grid(1)(1) == "X" && grid(1)(2) == "X") {
-        winner = "X";
+        winner = "X"
         there_is_a_winner()
       }
       else if (grid(2)(0) == "X" && grid(2)(1) == "X" && grid(2)(2) == "X") {
-        winner = "X";
+        winner = "X"
         there_is_a_winner()
       }
       else if (grid(0)(0) == "X" && grid(1)(0) == "X" && grid(2)(0) == "X") {
-        winner = "X";
+        winner = "X"
         there_is_a_winner()
       }
       else if (grid(0)(1) == "X" && grid(1)(1) == "X" && grid(2)(1) == "X") {
-        winner = "X";
+        winner = "X"
         there_is_a_winner()
       }
       else if (grid(0)(2) == "X" && grid(1)(2) == "X" && grid(2)(2) == "X") {
-        winner = "X";
+        winner = "X"
         there_is_a_winner()
       }
       else if (grid(0)(0) == "X" && grid(1)(1) == "X" && grid(2)(2) == "X") {
-        winner = "X";
+        winner = "X"
         there_is_a_winner()
       }
       else if (grid(0)(2) == "X" && grid(1)(1) == "X" && grid(2)(0) == "X") {
-        winner = "X";
+        winner = "X"
         there_is_a_winner()
       }
     }
