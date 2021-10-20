@@ -9,57 +9,37 @@ object Final2 extends App {
     var startNewGame = true
 
     def mainGameLoop(): Unit = {
-      print_instructions()
+      printInstructions()
       while (startNewGame) {
         singleGameLoop()
         val response = readLine("New game Y/N ?")
         if (response.toLowerCase.startsWith("y")) {
           resetGameState()
           while (!gameOver) {
-            print_grid(grid)
-            player_move(whoseTurn, grid)
+            singleGameLoop()
           }
-          //singleGameLoop()
         } else startNewGame = false
       }
     }
     mainGameLoop()
 
-
     def singleGameLoop(): Unit = {
-//      print_instructions()
       //loop that continues the game while the game is not over
       while (!gameOver) {
-        print_grid(grid)
-        player_move(whoseTurn, grid)
+        printGrid(grid)
+        playerMove(whoseTurn, grid)
       }
     }
-//    singleGameLoop()
-
-    //  def resetGameState(): Unit = {
-    //    while (startNewGame) {
-    //      grid = Array(Array(" ", " ", " "), Array(" ", " ", " "), Array(" ", " ", " "))
-    //      //winner = " "
-    //      //whoseTurn = "0"
-    //      print_grid(grid)
-    //      player_move(whoseTurn, grid)
-    //    }
-    //    singleGameLoop()
-    //  }
 
     def resetGameState() = {
       grid = Array(Array(" ", " ", " "), Array(" ", " ", " "), Array(" ", " ", " "))
       whoseTurn = "O"
       winner = " "
       gameOver = false
-      //print_grid(grid)
-
-    }
-
-
+      }
 
     //This function prints out instructions at the beginning
-    def print_instructions(): Unit = {
+    def printInstructions(): Unit = {
       println("INSTRUCTIONS:")
       println("The grid is of the form")
       println("|-----|-----|-----|")
@@ -77,19 +57,16 @@ object Final2 extends App {
         }
       }
       println("To place your symbol, you must enter the coordinate where you wish to place your symbol.")
-      println("Input must be given in the form x,y with no space or brackets")
-      println("For example, if you wish to place your symbol in the middle, you must enter '1,1'")
-      println("Example: ")
-      println("Where would you like to place your O? 1,1")
-      println("In case of illegal placement, the system will prompt you to try again.")
+      println("Input must be given in the form x,y with no space or brackets.")
+      println("Example: Where would you like to place your O? 1,1")
+      println("In case of incorrect placement, the system will ask you to try again.")
       println("That's all. Have fun!")
-      println()
       println()
       println("GAME BEGINS")
     }
 
     //this function prints the grid after every move
-    def print_grid(grid: Array[Array[String]]): Unit = {
+    def printGrid(grid: Array[Array[String]]): Unit = {
       println("|---|---|---|")
       for (i <- 0 to 2; j <- 0 to 2) {
         if (j == 0) {
@@ -107,23 +84,23 @@ object Final2 extends App {
     }
 
     //this function makes a player's move
-    def player_move(turn: String, grid: Array[Array[String]]): Unit = {
+    def playerMove(turn: String, grid: Array[Array[String]]): Unit = {
       val coordinate_input = readLine(s"Where would you like to place your $turn? ")
       val coordinate = coordinate_input.split(",").map(_.toInt)
       if (grid(coordinate(0))(coordinate(1)) == " ") {
         grid(coordinate(0))(coordinate(1)) = turn
-        switch_turn()
-        check_for_win()
-        check_if_tie()
+        switchTurn()
+        checkForWin()
+        checkIfTie()
       }
       else {
-        println("Oops! Illegal move. Try again!")
-        player_move(turn, grid)
+        println("Oops! Incorrect move. Try again!")
+        playerMove(turn, grid)
       }
     }
 
     //this function switches the players' turns
-    def switch_turn(): Unit = {
+    def switchTurn(): Unit = {
       if (whoseTurn == "O") {
         whoseTurn = "X"
       }
@@ -133,87 +110,87 @@ object Final2 extends App {
     }
 
     //this function checks if any player has won
-    def check_for_win(): Unit = {
+    def checkForWin(): Unit = {
       if (grid(0)(0) == "O" && grid(0)(1) == "O" && grid(0)(2) == "O") {
         winner = "O"
-        there_is_a_winner()
+        thereIsAWinner()
       }
       else if (grid(1)(0) == "O" && grid(1)(1) == "O" && grid(1)(2) == "O") {
         winner = "O"
-        there_is_a_winner()
+        thereIsAWinner()
       }
       else if (grid(2)(0) == "O" && grid(2)(1) == "O" && grid(2)(2) == "O") {
         winner = "O"
-        there_is_a_winner()
+        thereIsAWinner()
       }
       else if (grid(0)(0) == "O" && grid(1)(0) == "O" && grid(2)(0) == "O") {
         winner = "O"
-        there_is_a_winner()
+        thereIsAWinner()
       }
       else if (grid(0)(1) == "O" && grid(1)(1) == "O" && grid(2)(1) == "O") {
         winner = "O"
-        there_is_a_winner()
+        thereIsAWinner()
       }
       else if (grid(0)(2) == "O" && grid(1)(2) == "O" && grid(2)(2) == "O") {
         winner = "O"
-        there_is_a_winner()
+        thereIsAWinner()
       }
       else if (grid(0)(0) == "O" && grid(1)(1) == "O" && grid(2)(2) == "O") {
         winner = "O"
-        there_is_a_winner()
+        thereIsAWinner()
       }
       else if (grid(0)(2) == "O" && grid(1)(1) == "O" && grid(2)(0) == "O") {
         winner = "O"
-        there_is_a_winner()
+        thereIsAWinner()
       }
       else if (grid(0)(0) == "X" && grid(0)(1) == "X" && grid(0)(2) == "X") {
         winner = "X"
-        there_is_a_winner()
+        thereIsAWinner()
       }
       else if (grid(1)(0) == "X" && grid(1)(1) == "X" && grid(1)(2) == "X") {
         winner = "X"
-        there_is_a_winner()
+        thereIsAWinner()
       }
       else if (grid(2)(0) == "X" && grid(2)(1) == "X" && grid(2)(2) == "X") {
         winner = "X"
-        there_is_a_winner()
+        thereIsAWinner()
       }
       else if (grid(0)(0) == "X" && grid(1)(0) == "X" && grid(2)(0) == "X") {
         winner = "X"
-        there_is_a_winner()
+        thereIsAWinner()
       }
       else if (grid(0)(1) == "X" && grid(1)(1) == "X" && grid(2)(1) == "X") {
         winner = "X"
-        there_is_a_winner()
+        thereIsAWinner()
       }
       else if (grid(0)(2) == "X" && grid(1)(2) == "X" && grid(2)(2) == "X") {
         winner = "X"
-        there_is_a_winner()
+        thereIsAWinner()
       }
       else if (grid(0)(0) == "X" && grid(1)(1) == "X" && grid(2)(2) == "X") {
         winner = "X"
-        there_is_a_winner()
+        thereIsAWinner()
       }
       else if (grid(0)(2) == "X" && grid(1)(1) == "X" && grid(2)(0) == "X") {
         winner = "X"
-        there_is_a_winner()
+        thereIsAWinner()
       }
     }
 
     //this function checks if there is a tie ,and if so, ends the game
-    def check_if_tie(): Unit = {
+    def checkIfTie(): Unit = {
       if (grid(0)(0) != " " && grid(0)(1) != " " && grid(0)(2) != " " && grid(1)(0) != " " && grid(1)(1) != " "
         && grid(1)(2) != " " && grid(2)(0) != " " && grid(2)(1) != " " && grid(2)(2) != " " && !gameOver) {
         gameOver = true
-        print_grid(grid)
+        printGrid(grid)
         println("GAME OVER")
         println("Well played! It is a tie!")
       }
     }
 
     //this function congratulates the winner and ends the game
-    def there_is_a_winner(): Unit = {
-      print_grid(grid)
+    def thereIsAWinner(): Unit = {
+      printGrid(grid)
       println("GAME OVER")
       println(s"$winner is the winner!")
       gameOver = true
