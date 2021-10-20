@@ -2,6 +2,8 @@ object Final2 extends App {
   import scala.io.StdIn.readLine
 
    //assignment of global variables
+    var player1 = " Player 1"
+    var player2 = "Player 2"
     var whoseTurn = "O"
     var winner = " "
     var gameOver = false
@@ -15,9 +17,6 @@ object Final2 extends App {
         val response = readLine("New game Y/N ?")
         if (response.toLowerCase.startsWith("y")) {
           resetGameState()
-          while (!gameOver) {
-            singleGameLoop()
-          }
         } else startNewGame = false
       }
     }
@@ -85,8 +84,20 @@ object Final2 extends App {
 
     //this function makes a player's move
     def playerMove(turn: String, grid: Array[Array[String]]): Unit = {
-      val coordinate_input = readLine(s"Where would you like to place your $turn? ")
-      val coordinate = coordinate_input.split(",").map(_.toInt)
+      val coordinateInput = readLine(s"Where would you like to place your $turn? ")
+//        coordinateInput match {
+//            case "1" => "0,0"
+//            case "2" => "0,1"
+//            case "3" => "0,2"
+//            case "4" => "1,0"
+//            case "5" => "1,1"
+//            case "6" => "1,2"
+//            case "7" => "2,0"
+//            case "8" => "2,1"
+//            case "9" => "2,2"
+////            case _  => println("Error input, please enter numbers from 0 to 2.")
+//            }
+      val coordinate = coordinateInput.split(",").map(_.toInt)
       if (grid(coordinate(0))(coordinate(1)) == " ") {
         grid(coordinate(0))(coordinate(1)) = turn
         switchTurn()
@@ -195,8 +206,5 @@ object Final2 extends App {
       println(s"$winner is the winner!")
       gameOver = true
     }
-
-
-
 
 }
