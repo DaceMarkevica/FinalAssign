@@ -93,8 +93,8 @@ object Final2 extends App {
       ((coordinate(1) < 0) || (coordinate(1) > 2))) ||
       (((coordinate(0) < 0) || (coordinate(0) > 2)) &&
       ((coordinate(1) >= 0) && (coordinate(1) <= 2))) ||
-      (((coordinate(0) >= 0) && (coordinate(0) <= 2)) &&
-      ((coordinate(1) < 0) || (coordinate(1) > 2)))) {
+      ((coordinate(0) >= 0) && (coordinate(0) <= 2)) &&
+      ((coordinate(1) < 0) || (coordinate(1) > 2))) {
       println("Oops! no - no - no.  Try again!")
       playerMove(turn, grid)
     } else {
@@ -206,6 +206,5 @@ object Final2 extends App {
       println(s"$winner is the winner!")
       gameOver = true
     }
-
   }
 }
